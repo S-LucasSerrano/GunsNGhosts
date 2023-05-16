@@ -7,7 +7,7 @@ Este es un proyecto personal en el que estoy trabajando para tener una muestra d
 
 Aquí podéis ver un gameplay del juego tal y como está ahora mismo: https://youtu.be/9JAlgZJ8IRk.
 
-La documentación de diseño de este se puede leer [aquí](https://lucasserrano.notion.site/Design-Documentation-f54487c685e04fe2a48a9ed9e9bbdc8b).
+La documentación de diseño del juego se puede leer [aquí](https://lucasserrano.notion.site/Design-Documentation-f54487c685e04fe2a48a9ed9e9bbdc8b).
 
 Y para ver algo de documentación de código podéis ir [aquí](https://github.com/S-LucasSerrano/CameraShaker/wiki). Se trata de un componente que utilizo para añadir screen shake en muchos de mis proyectos, incluido este, que tiene una pequeña wiki donde describo todas las clases, propiedades y métodos que incluye.
 
@@ -16,4 +16,4 @@ También os dejo enlaces a mi portafolio y perfil de Linkedin:
 * https://s-lucasserrano.github.io/Portfolio/. 
 * https://www.linkedin.com/in/s-lucasserrano/.
 ---
-Un saludo!
+¡Un saludo!
