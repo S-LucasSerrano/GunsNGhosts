@@ -1,0 +1,198 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1679572205934466769
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 262380763806364244, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: m_Color.g
+      value: 0.41960785
+      objectReference: {fileID: 0}
+    - target: {fileID: 262380763806364244, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: m_Color.r
+      value: 0.27450982
+      objectReference: {fileID: 0}
+    - target: {fileID: 2019259647922590052, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2019259647922590052, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2019259647922590052, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2019259647922590052, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2170079139350666498, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: m_Name
+      value: Ghost.Blue
+      objectReference: {fileID: 0}
+    - target: {fileID: 2542323580348439136, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.41960785
+      objectReference: {fileID: 0}
+    - target: {fileID: 2542323580348439136, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.27450982
+      objectReference: {fileID: 0}
+    - target: {fileID: 2763511715534883705, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4772834175482753617, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5185259458949472955, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: maxHealth
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6107492197735674626, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: behaviours.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6107492197735674626, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: behaviours.Array.data[0]
+      value: 
+      objectReference: {fileID: 6247670657314503911}
+    - target: {fileID: 6575076559321158293, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.30463225
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575076559321158293, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0977
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916612183527131960, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916612183527131960, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916612183527131960, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916612183527131960, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916612183527131960, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916612183527131960, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916612183527131960, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916612183527131960, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916612183527131960, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916612183527131960, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916612183527131960, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7587462773978914735, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8967301742486768958, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093665470992481295, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: m_Color.g
+      value: 0.41960785
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093665470992481295, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: m_Color.r
+      value: 0.27450982
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2170079139350666498, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6247670657314503911}
+    - targetCorrespondingSourceObject: {fileID: 2170079139350666498, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -5774366273288285910}
+  m_SourcePrefab: {fileID: 100100000, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+--- !u!1 &671776861502344147 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2170079139350666498, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+  m_PrefabInstance: {fileID: 1679572205934466769}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6247670657314503911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671776861502344147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b8c5307601a1414087f3fe4794c8bd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  maxSpeed: 0.04
+  acceleration: 0.5
+  obstacleDetectionMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  obstacleMinDistance: 0.5
+  obstacleMaxDistance: 2
+--- !u!114 &-5774366273288285910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671776861502344147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 0
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
