@@ -3,7 +3,7 @@
 * lucas.ss.serrano@gmail.com
 
 ---
-Este es un proyecto personal en el que estoy trabajando para tener muestras del código de un proyecto completo, aunque sencillo, en mi portafolio. Sin embargo, aún no está terminado y faltan algunas _features_. Pero creo que es la mejor muestra de lo que puedo aportar como programador. Es un proyecto ordenado y bien comentado. Con una buena arquitectura que lo hace reutilizable y muy escalable.
+Este es un proyecto personal en el que estoy trabajando para tener una muestra del código de un proyecto completo -aunque sencillo- en mi portafolio. Sin embargo, aún no está terminado y faltan algunas _features_. Pero creo que es la mejor muestra de lo que puedo aportar como programador. Es un proyecto ordenado y bien comentado. Con una buena arquitectura que lo hace reutilizable y muy escalable.
 
 Aquí podéis ver un gameplay del juego tal y como está ahora mismo: https://youtu.be/9JAlgZJ8IRk.
 
