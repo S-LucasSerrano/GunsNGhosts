@@ -2,7 +2,8 @@
 
 Guns ‘N’ Ghosts is a ```top-down``` ```arena shooter``` that makes you constantly move, dodge enemies and adapt to new weapons. It's a little arcade game that humbly asks the question “*What if Pac-Man had a Gun?*”.
 
-[![Guns N Ghosts Trailer](https://img.youtube.com/vi/UAoElLIHjG4/0.jpg)](https://www.youtube.com/watch?v=UAoElLIHjG4)
+[![Screemshot 1](https://img.itch.zone/aW1hZ2UvMjMzNzMyNi8xMzg1NzQ1Ny5qcGc=/347x500/nbFPRV.jpg)](https://www.youtube.com/watch?v=UAoElLIHjG4)
+[![Screemshot 2](https://img.itch.zone/aW1hZ2UvMjMzNzMyNi8xMzg1NzQ1OS5qcGc=/347x500/Tw%2FgzP.jpg)](https://www.youtube.com/watch?v=UAoElLIHjG4)
 
 You can play it directly in your browser from itch.io: https://lucasserrano.itch.io/gunsnghosts.
 
