@@ -6,27 +6,37 @@ namespace GunsNGhosts.Ghosts
 	/// <summary> Sets the target of a Ghost to a random point of the pathfinding. </summary>
 	public class RandomizeGhostTarget : MonoBehaviour, IRequire<Ghost>
 	{
+		Transform playerTransform = null;
 		Transform point;
 		GridNode[] nodes = { };
 
 
 		// ------------------------------------------------------------------
 
-		private void Start()
+		private void Awake()
+		{
+			Debug.LogError("WARNINNG: this script was not working correctly.");
+		}
+
+		public void SetRequirement(Ghost requirement)
+		{
+			ghost = requirement;
+			playerTransform = ReferenceProvider.GetReference<Player>().Transform;
+
+			if (point == null)
+			{
+				point = new GameObject(transform.name + ".Target").transform;
+				point.parent = transform.parent;
+			}
+			ghost.Behaviour.Target = point;
+		}
+
+		private void OnEnable()
 		{
 			AstarPath astar = AstarPath.active;
 			nodes = astar.data.gridGraph.nodes;
 
 			FindNewTarget();
-		}
-
-		public void SetRequirement(Ghost requirement)
-		{
-			if (point == null)
-				point = new GameObject(transform.name + ".Target").transform;
-
-			ghost = requirement;
-			ghost.Behaviour.Target = point;
 		}
 
 
@@ -36,6 +46,8 @@ namespace GunsNGhosts.Ghosts
 		{
 			if (point == null)
 				return;
+
+			Debug.DrawLine(transform.position, ghost.Behaviour.Target.position, Color.red);
 
 			Vector3 dir = transform.position - point.position;
 			if (dir.sqrMagnitude <= Mathf.Pow(1, 2))
@@ -51,12 +63,12 @@ namespace GunsNGhosts.Ghosts
 			{
 				int i = Random.Range(0, nodes.Length - 1);
 				point.position = (Vector3)nodes[i].position;
-
 			}
 			else
 			{
-				point.position = Game.Player.Transform.position;
+				point.position = playerTransform.position;
 			}
+			ghost.Behaviour.Target = point;
 		}
 
 

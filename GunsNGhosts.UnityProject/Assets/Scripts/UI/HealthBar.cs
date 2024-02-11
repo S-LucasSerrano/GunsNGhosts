@@ -20,21 +20,27 @@ namespace GunsNGhosts.UI
 		private IEnumerator Start()
 		{
 			// Find a reference to the health component in the scene.
-			healthComponent = Game.Player.Health;
-			// Add a listener to the damage event.
-			healthComponent.OnDamaged.AddListener(OnPlayerDamage);
+			healthComponent = ReferenceProvider.GetReference<Player>().Health;
 
 			// Wait one frame so the health component has ended its Start call, and show the starting health.
 			yield return null;
 			bar.fillAmount = (float)healthComponent.CurrentHealth / (float)healthComponent.MaxHealth;
 		}
 
+		int _lastHP = 0;
 
-		// ----------------------------------------------------------------------
-		public void OnPlayerDamage(int remainingHealth)
+		private void Update()
+		{
+			if (healthComponent.CurrentHealth != _lastHP)
+				UpdateUI();
+
+			_lastHP = healthComponent.CurrentHealth;
+		}
+
+		public void UpdateUI()
 		{
 			animator.SetTrigger("Damage");
-			bar.fillAmount = (float)remainingHealth / (float)healthComponent.MaxHealth;
+			bar.fillAmount = (float)healthComponent.CurrentHealth / (float)healthComponent.MaxHealth;
 		}
 	}
 }

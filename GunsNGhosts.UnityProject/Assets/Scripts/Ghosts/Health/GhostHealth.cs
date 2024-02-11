@@ -14,6 +14,8 @@ namespace GunsNGhosts.Ghosts
 
 		/// <summary> AudioSource played when this Ghost gets damage. </summary>
 		[Space] [SerializeField] AudioSource damageSound = null;
+		/// <summary> AudioSource played when this Ghsoit dies. </summary>
+		[SerializeField] AudioSource deathSound = null;
 		/// <summary> Max difference from the original pithch to play the damage sound. </summary>
 		[SerializeField] float pitchRandomization = 0.01f;
 		/// <summary> Original pitch of the damage sound. </summary>
@@ -23,7 +25,7 @@ namespace GunsNGhosts.Ghosts
 		[SerializeField] ParticleSystem deathParticles = null;
 
 		/// <summary> Event invoked when this Ghost dies. </summary>
-		UnityEvent onDeath = new UnityEvent();
+		UnityEvent<Component> onDeath = new UnityEvent<Component>();
 
 
 		// ---------------------------------------------------------------
@@ -34,6 +36,16 @@ namespace GunsNGhosts.Ghosts
 
 			originalPitch = damageSound.pitch;
 			deathParticles.transform.parent = transform.parent;
+			deathSound.transform.parent = transform.parent;
+		}
+
+		private void OnEnable()
+		{
+			// Reset this Ghost health.
+			currentHealth = maxHealth;
+			// Reset the animation.
+			if (animator != null)
+				animator.Play("Idle", 0);
 		}
 
 
@@ -43,8 +55,14 @@ namespace GunsNGhosts.Ghosts
 		/// Function called when taking damage.
 		protected override void Damaged(int damage, Component source = null)
 		{
-			Vector3 dir = transform.position - source.transform.position;
-			transform.position += dir.normalized * knokback;
+			if (isActiveAndEnabled == false)
+				return;
+
+			if (source != null)
+			{
+				Vector3 dir = transform.position - source.transform.position;
+				transform.position += dir.normalized * knokback;
+			}
 
 			animator.SetTrigger("Damage");
 
@@ -57,23 +75,20 @@ namespace GunsNGhosts.Ghosts
 		{ 
 			// Play particles pointing to the away from the damage source.
 			deathParticles.transform.position = transform.position;
-			Vector3 dir = transform.position - source.transform.position;
-			deathParticles.transform.rotation =	Quaternion.LookRotation( dir, Vector2.up );
+			if (source)
+			{
+				Vector3 dir = transform.position - source.transform.position;
+				deathParticles.transform.rotation = Quaternion.LookRotation(dir, Vector2.up);
+			}
 			deathParticles.Clear();
 			deathParticles.Play();
 
-			// Reset this Ghost health.
-			currentHealth = maxHealth;
+			// Sound.
+			deathSound.Play();
 
-			/* Habra que devolverlo a la pool. */
+			onDeath.Invoke(source);
 
-			Vector3 pos = new Vector3();
-			pos.x = Random.Range(1f, -1f);
-			pos.y = Random.Range(1f, -1f);
-			pos.z = 0;
-			transform.position = pos.normalized * 10;
-
-			onDeath.Invoke();
+			gameObject.SetActive(false);
 		}
 
 		#endregion
@@ -82,8 +97,8 @@ namespace GunsNGhosts.Ghosts
 		// ---------------------------------------------------------------
 		#region Properties
 
-		/// <summary> Event invoked when this Ghost dies. </summary>
-		public UnityEvent OnDeath => onDeath;
+		/// <summary> Event invoked when this Ghost dies, passing the damage source as a parameter. </summary>
+		public UnityEvent<Component> OnDeath => onDeath;
 
 		#endregion
 	}

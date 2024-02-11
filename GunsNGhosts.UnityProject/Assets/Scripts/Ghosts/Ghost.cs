@@ -8,6 +8,7 @@ namespace GunsNGhosts.Ghosts
 	public class Ghost : MonoBehaviour
 	{
 		[Space][SerializeField] GhostBehaviour[] behaviours = { };
+		[SerializeField] GhostHealth health = null;
 		[SerializeField] Animator animator = null;
 
 
@@ -15,6 +16,7 @@ namespace GunsNGhosts.Ghosts
 
 		private void Reset()
 		{
+			health = GetComponent<GhostHealth>();
 			animator = GetComponent<Animator>();
 		}
 
@@ -43,6 +45,9 @@ namespace GunsNGhosts.Ghosts
 
 		/// <summary> Array of behaviours of this Ghost. </summary>
 		public GhostBehaviour[] Behaviours => behaviours;
+
+		/// <summary> Health component of this Ghost. </summary>
+		public GhostHealth Health => health;
 
 		/// <summary> The animator of this Ghost. </summary>
 		public Animator Animator => animator;

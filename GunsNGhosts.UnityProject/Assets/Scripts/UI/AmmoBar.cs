@@ -20,7 +20,7 @@ namespace GunsNGhosts.UI
 		private IEnumerator Start()
 		{
 			// Find a reference to the shooter in the scene.
-			shooter = Game.Player.Shooter;
+			shooter = ReferenceProvider.GetReference<Player>().Shooter;
 
 			// Wait one frame so the GunShooter has ended its Start call, and show the starting ammo.
 			yield return null;
@@ -32,14 +32,17 @@ namespace GunsNGhosts.UI
 
 		// ----------------------------------------------------------------------
 
+		int prevAmmo = 0;
+
 		private void Update()
 		{
 			if (shooter == null)
 				return;
 
 			// Update the ammo ui while the player is shooting.
-			if (shooter.Shooting)
+			if (shooter.Ammo != prevAmmo)
 				UpdateAmmoUI();
+			prevAmmo = shooter.Ammo;
 		}
 
 		public void UpdateAmmoUI()

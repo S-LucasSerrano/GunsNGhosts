@@ -28,14 +28,22 @@ PrefabInstance:
       propertyPath: InitialModule.startColor.maxColor.g
       value: 0.6877027
       objectReference: {fileID: 0}
+    - target: {fileID: 5715374532075169704, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: points
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5715374532075169704, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: hpPackChanceAtZero
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5715374532075169704, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
+      propertyPath: ammoPackChanceAtZero
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 6107492197735674626, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
       propertyPath: behaviours.Array.size
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6107492197735674626, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
-      propertyPath: behaviours.Array.data[0]
-      value: 
-      objectReference: {fileID: 5777414483421273814}
     - target: {fileID: 6575076559321158293, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
       propertyPath: m_LocalScale.y
       value: 0.28775
@@ -102,17 +110,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2170079139350666498, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5777414483421273814}
-    - targetCorrespondingSourceObject: {fileID: 2170079139350666498, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -2334329452196552549}
+      addedObject: {fileID: 1681901493800303283}
   m_SourcePrefab: {fileID: 100100000, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
 --- !u!1 &7209018551048142260 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2170079139350666498, guid: f1d5dff2de761864c86df24cb4bcd81b, type: 3}
   m_PrefabInstance: {fileID: 8797288567443792054}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5777414483421273814
+--- !u!114 &1681901493800303283
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,10 +126,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7209018551048142260}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e5f572095acbca4393f22647439640e, type: 3}
+  m_Script: {fileID: 11500000, guid: ef3261886dff6d345a39e34eea2433b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   maxSpeed: 0.04
   acceleration: 0.2
   obstacleDetectionMask:
@@ -132,15 +136,3 @@ MonoBehaviour:
     m_Bits: 1024
   obstacleMinDistance: 0.25
   obstacleMaxDistance: 2
---- !u!114 &-2334329452196552549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7209018551048142260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e66a5d9c6081cb4cb4d0a200e2205be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

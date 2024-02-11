@@ -3,7 +3,7 @@ using UnityEngine;
 namespace GunsNGhosts.Score
 {
 	/// <summary> Adds score when the player touches it. </summary>
-	public class ScorePoint : MonoBehaviour, IRequire<Score>
+	public class ScorePoint : MonoBehaviour
 	{
 		/// <summary> Score manger. </summary>
 		Score scoreManager = null;
@@ -13,18 +13,26 @@ namespace GunsNGhosts.Score
 
 		// ----------------------------------------------------------------
 
-		public void SetRequirement(Score requirement)
+		private void Start()
 		{
-			scoreManager = requirement;
+			scoreManager = FindObjectOfType<Score>();
 		}
-
 
 		// ----------------------------------------------------------------
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{
-			if (other.gameObject.layer == LayerMask.NameToLayer("Player") 
-				&& scoreManager != null)
+			TryToCollectPoint(other.gameObject.layer);
+		}
+
+		private void OnCollisionEnter2D(Collision2D collision)
+		{
+			TryToCollectPoint(collision.gameObject.layer);
+		}
+
+		void TryToCollectPoint(int layer)
+		{
+			if (layer == LayerMask.NameToLayer("Player") && scoreManager != null)
 			{
 				scoreManager.CollectPoint(this);
 				gameObject.SetActive(false);

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace GunsNGhosts.Guns
 {
@@ -10,17 +11,19 @@ namespace GunsNGhosts.Guns
 		Vector3 direction = Vector3.right;
 
 		/// <summary> Speed of this projectile when is shot. </summary>
-		[Space][SerializeField] float initialSpeed = 10;
+		[Space]public float initialSpeed = 10;
 		/// <summary> Current speed of this projectile. </summary>
 		float speed = 0;
 		/// <summary> Speed modifier per second. </summary>
-		[SerializeField] float speedOverTime = -1f;
+		public float speedOverTime = -1f;
 
 		/// <summary> Time that this projectile waits to destroy itselef haver been shot. </summary>
-		[SerializeField] float lifeTime = 1;
+		public float lifeTime = 1;
 		/// <summary> Current time remaining to destroy this projectile. </summary>
 		float lifeTimeCounter = 0;
 
+		/// <summary> If true, this projectile always look in the direction its moving with its right vector. </summary>
+		[Space][SerializeField] bool lookInMovementDirection = true;
 		/// <summary> Currently active movement routine. </summary>
 		Coroutine movementRoutine = null;
 		/// <summary> Currently active life time routine. </summary>
@@ -29,22 +32,14 @@ namespace GunsNGhosts.Guns
 		[Space][SerializeField] float speedReductionOnContact = .2f;
 		[SerializeField] float lifeReductionOnContact = .2f;
 
-		[Space][SerializeField] LayerMask destroyOnTouching = 0;
+		[Space] [SerializeField] LayerMask collideWith = -1;
+		[SerializeField] LayerMask destroyOnTouching = 0;
 
 		/// <summary> Particles played when this Bullet is destroyed. </summary>
 		[Space] [SerializeField] ParticleSystem particles = null;
 
-
-		// ----------------------------------------------------------------------
-		#region Start
-
-		private void Start()
-		{
-			if (particles != null)
-				particles.transform.parent = transform.parent;
-		}
-
-		#endregion
+		/// <summary> Event invoked when this projectile is destroyed. </summary>
+		[HideInInspector] public UnityEvent onDestroyed = new();
 
 
 		// ----------------------------------------------------------------------
@@ -52,7 +47,13 @@ namespace GunsNGhosts.Guns
 
 		public override void Shoot()
 		{
+			Shoot(transform.right);
+		}
+
+		public void Shoot(Vector3 dir)
+		{
 			gameObject.SetActive(true);
+			direction = dir;
 
 			// Start moving.
 			if (movementRoutine != null) StopCoroutine(movementRoutine);
@@ -67,7 +68,6 @@ namespace GunsNGhosts.Guns
 		IEnumerator MovementRoutine()
 		{
 			speed = initialSpeed;
-			direction = transform.right;
 			direction.z = 0;
 
 			while (speed > 0)
@@ -75,7 +75,8 @@ namespace GunsNGhosts.Guns
 				transform.position += direction.normalized * speed * Time.deltaTime;
 				speed += speedOverTime * Time.deltaTime;
 
-				transform.right = direction;
+				if (lookInMovementDirection)
+					transform.right = direction;
 
 				yield return new WaitForFixedUpdate();
 			}
@@ -100,11 +101,14 @@ namespace GunsNGhosts.Guns
 			// Particles.
 			if (particles != null)
 			{
+				particles.transform.parent = transform.parent;
 				particles.transform.SetPositionAndRotation(transform.position, transform.rotation);
 				particles.Play();
 			}
 
 			gameObject.SetActive(false);
+
+			onDestroyed.Invoke();
 		}
 
 		#endregion
@@ -115,6 +119,9 @@ namespace GunsNGhosts.Guns
 
 		private void OnCollisionEnter2D(Collision2D collision)
 		{
+			if (collideWith.ContainsLayer(collision.gameObject.layer) == false)
+				return;
+
 			// Refelect when touching something.
 			ContactPoint2D contact = collision.contacts[0];
 			direction = Vector3.Reflect(direction, contact.normal);

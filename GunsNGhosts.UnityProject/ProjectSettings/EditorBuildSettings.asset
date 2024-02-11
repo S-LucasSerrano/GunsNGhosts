@@ -6,6 +6,27 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Sample.CharacterController.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/Initialization.unity
+    guid: be53fb7399fbd28429e9a2fd6ea6232f
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: aa5eba8c9ac89f742b3e8d77304924ed
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level.Pacman.unity
+    guid: 12761f9093870d24c8f980c04f712cfd
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level.Void.unity
+    guid: b975425260413f749b28f0e29a133d57
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level.House.unity
+    guid: bfb13ae04fa004c4ca02f510d569bbee
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level.Warehouse.unity
+    guid: 7cf28788931e4d44eb09c3de5830c76c
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level.DiscRoom.unity
+    guid: 5f55c341711e9bc428a138f1858c1a9d
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level.Palace.unity
+    guid: dcf08e89a66130c42b7c65e7b6f2ec5e
   m_configObjects: {}

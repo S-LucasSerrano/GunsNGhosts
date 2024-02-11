@@ -7,6 +7,9 @@ namespace GunsNGhosts.Guns
 	{
 		/// <summary> Speed of this Bullet. </summary>
 		[Space] [SerializeField] float speed = 10;
+
+		[SerializeField] LayerMask collideWith = 1 << 9;
+
 		/// <summary> Particles played when this Bullet is destroyed. </summary>
 		[Space] [SerializeField] ParticleSystem particles = null;
 
@@ -32,7 +35,8 @@ namespace GunsNGhosts.Guns
 
 		private void OnTriggerEnter2D(Collider2D collision)
 		{
-			Destroy();
+			if (collideWith.ContainsLayer(collision.gameObject.layer))
+				Destroy();
 		}
 
 

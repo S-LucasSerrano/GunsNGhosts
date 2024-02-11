@@ -28,9 +28,13 @@ namespace GunsNGhosts.Guns
 		[SerializeField] float shootingCooldown = 0.5f;
 		/// <summary> Is this gun is waiting the cooldown after shooting? </summary>
 		bool coolingdown = false;
+		/// <summary> Currently active cooldown routine. </summary>
+		Coroutine cooldownRoutine = null;
 
 		/// <summary> Distance the player moves backwards when shooting. </summary>
 		[Space] [SerializeField] float recoil = 0;
+		/// <summary> Reference to player transform. </summary>
+		Transform playerTransform = null;
 
 		/// <summary> Animator of the player character. </summary>
 		Animator playerAnimator = null;
@@ -47,15 +51,15 @@ namespace GunsNGhosts.Guns
 
 		/// <summary> AudioSource that plays when shooting. </summary>
 		[Space] [SerializeField] AudioSource shootingAudio = null;
-		/// <summary> Max randomization from the original audio pitch. </summary>
+		/// <summary> Max randomization for the shooting audio pitch. </summary>
 		[SerializeField] float shootingPitchRandomization = 0.1f;
 		/// <summary> Original pitch of the shooting audio. </summary>
 		float shootingOriginalPitch = 1;
-		/// <summary> AudioSource that plays when shooting. </summary>
+		/// <summary> AudioSource that plays when shooting whit no bullets. </summary>
 		[SerializeField] AudioSource emptyAudio = null;
-		/// <summary> Max randomization from the original audio pitch. </summary>
+		/// <summary> Max randomization for the empty audio pitch. </summary>
 		[SerializeField] float emptyPitchRandomization = 0.1f;
-		/// <summary> Original pitch of the shooting audio. </summary>
+		/// <summary> Original pitch of the empty audio. </summary>
 		float emptyOriginalPitch = 1;
 
 
@@ -65,8 +69,9 @@ namespace GunsNGhosts.Guns
 		private void Start()
 		{
 			// Find references to relevant components.
-			cameraShaker = Game.CameraShaker;
-			playerAnimator = Game.Player.Animator;
+			cameraShaker = ReferenceProvider.GetReference<CameraShaker>();
+			playerTransform = ReferenceProvider.GetReference<Player>().Transform;
+			playerAnimator = ReferenceProvider.GetReference<Player>().Animator;
 
 			// Save original audio pitch.
 			if (shootingAudio != null)
@@ -76,6 +81,9 @@ namespace GunsNGhosts.Guns
 
 			// Initialize the bullet pool.
 			bulletPool = new FixedPool<Bullet>(CreateBullet, poolSize);
+			bulletPool.Initialize();
+
+			bulletPrefab.gameObject.SetActive(false);
 		}
 
 		/// <summary> Instantiate a new bullet. </summary>
@@ -114,10 +122,11 @@ namespace GunsNGhosts.Guns
 		// --------------------------------
 		#region Shoot
 
-		public void Shoot()
+		public virtual void Shoot()
 		{
 			// Wait the cooldown time to be able to shoot again.
-			StartCoroutine(CooldownRoutine());
+			if (cooldownRoutine != null) StopCoroutine(cooldownRoutine);
+			cooldownRoutine = StartCoroutine(CooldownRoutine());
 
 			// If there is no ammo left, dont shoot.
 			if (Shooter.Ammo <= 0)
@@ -150,7 +159,9 @@ namespace GunsNGhosts.Guns
 			}
 
 			// Recoil.
-			Game.Player.Transform.Translate( -ShootingPoint.right * recoil );
+			Vector3 recoilDir = -ShootingPoint.right;
+			recoilDir.z = 0;
+			playerTransform.Translate( recoilDir.normalized * recoil );
 
 			PlayShootingAnimation();        // Animation.
 			PlayCameraShake();              // Camera Shake.
@@ -160,7 +171,7 @@ namespace GunsNGhosts.Guns
 		}
 
 		/// <summary> Wait the cooldown time to be able to shoot again. </summary>
-		IEnumerator CooldownRoutine()
+		protected IEnumerator CooldownRoutine()
 		{
 			coolingdown = true;
 			yield return new WaitForSeconds(shootingCooldown);

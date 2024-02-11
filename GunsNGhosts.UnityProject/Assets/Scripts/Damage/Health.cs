@@ -23,13 +23,18 @@ namespace GunsNGhosts.Damage
 
 		public virtual void TakeDamage(int damage, Component source = null)
 		{
+			if (currentHealth <= 0)
+				return;
+
 			currentHealth -= damage;
 
-			Damaged(damage, source);
-			if (currentHealth <= 0)
-			{
+			if (currentHealth > maxHealth)
+				currentHealth = maxHealth;
+
+			if (currentHealth > 0)
+				Damaged(damage, source);
+			else
 				Die(source);
-			}
 		}
 
 		#endregion

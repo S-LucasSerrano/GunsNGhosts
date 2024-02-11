@@ -16,12 +16,16 @@ namespace GunsNGhosts.Damage
 		/// <summary> Curretly active inmunity routine. </summary>
 		Coroutine inmunityRoutine = null;
 
+		/// <summary> Reference to the camera shaker component. </summary>
+		CameraShaker camShaker = null;
 		/// <summary> Camera shake added when getting damage. </summary>
 		[SerializeField] [Range(0, 1)] float damageCamShake = 0.1f;
 		/// <summary> Time that the game complitly freezes after getting damage. </summary>
 		[SerializeField] float impactEffectDuration = 0.05f;
 		/// <summary> Partciles played when getting damage. </summary>
 		[SerializeField] ParticleSystem damageParticles = null;
+		/// <summary> AudioSource played when getting damage. </summary>
+		[SerializeField] AudioSource damageSound = null;
 
 		/// <summary> Event invoked when getting damaged, passing the remaining health as a parameter. </summary>
 		UnityEvent<int> onDamaged = new UnityEvent<int>();
@@ -32,10 +36,14 @@ namespace GunsNGhosts.Damage
 		[SerializeField] float deathSlowmotionDuration = 1f;
 		/// <summary> Particles played when the player dies. </summary>
 		[SerializeField] ParticleSystem deathParticles = null;
+		/// <summary> AudioSource played when the player dies. </summary>
+		[SerializeField] AudioSource deathSound = null;
+		/// <summary> Projetile shot when the player dies. </summary>
 		[SerializeField] GunsNGhosts.Guns.Projectile deadPlayerProjectile = null;
 
 		/// <summary> Event invoked whem the player dies. </summary>
 		UnityEvent onDeath = new UnityEvent();
+		[Space] [SerializeField] GameEvent onDeathGameEvent = null;
 
 
 		// ---------------------------------------------------------------------
@@ -49,6 +57,8 @@ namespace GunsNGhosts.Damage
 		protected override void Start()
 		{
 			base.Start();
+
+			camShaker = ReferenceProvider.GetReference<CameraShaker>();
 
 			deadPlayerProjectile.transform.position = Vector3.up * 10000;
 		}
@@ -70,16 +80,22 @@ namespace GunsNGhosts.Damage
 			base.TakeDamage(damage, source);
 
 			// Add camera shake.
-			CameraShaker camShaker = Game.CameraShaker;
-			if (camShaker != null)
-				camShaker.AddLimitedShake(damageCamShake);
+			camShaker.AddLimitedShake(damageCamShake);
 
 			Slowmotion(0, impactEffectDuration);    // Freeze the game.
 			player.Animator.SetTrigger("Damage");   // Animation.
 			damageParticles.Play();                 // Particles.
+			damageSound.Play();						// Sound.
 
 			// Fire the damage event.
 			onDamaged.Invoke(currentHealth);
+		}
+
+		public void Heal(int amount)
+		{
+			currentHealth += amount;
+			if (currentHealth > maxHealth)
+				currentHealth = maxHealth;
 		}
 
 		IEnumerator InmunityRoutine()
@@ -101,9 +117,12 @@ namespace GunsNGhosts.Damage
 			deadPlayerProjectile.transform.position = transform.position;
 			deadPlayerProjectile.transform.parent = transform.parent;
 
-			Vector3 dir = source.transform.position - transform.position;
-			dir = Vector3.Cross( dir, Vector3.forward );
-			deadPlayerProjectile.transform.LookAt( transform.position + Vector3.forward, dir );
+			if (source != null)
+			{
+				Vector3 dir = source.transform.position - transform.position;
+				dir = Vector3.Cross(dir, Vector3.forward);
+				deadPlayerProjectile.transform.LookAt(transform.position + Vector3.forward, dir);
+			}
 
 			deadPlayerProjectile.Shoot();
 
@@ -113,9 +132,13 @@ namespace GunsNGhosts.Damage
 			deathParticles.transform.parent = transform.parent;
 			deathParticles.transform.position = transform.position;
 			deathParticles.Play();
+			// Sound.
+			deathSound.transform.parent = transform.parent;
+			deathSound.Play();
 
 			// Fire the dead event.
 			onDeath.Invoke();
+			onDeathGameEvent.Invoke();
 
 			gameObject.SetActive(false);
 		}

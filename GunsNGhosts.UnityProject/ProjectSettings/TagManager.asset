@@ -17,8 +17,8 @@ TagManager:
   - Wall
   - Ghost
   - Score
-  - 
-  - 
+  - ExternalWall
+  - MovingWall
   - 
   - 
   - 

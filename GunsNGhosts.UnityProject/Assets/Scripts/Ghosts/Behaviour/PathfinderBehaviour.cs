@@ -17,13 +17,20 @@ namespace GunsNGhosts.Ghosts
 
 		// ------------------------------------------------------------------
 
-		protected virtual void Start() => seeker = GetComponent<Seeker>();
+		protected override void Start()
+		{
+			base.Start();
+			seeker = GetComponent<Seeker>();
+		}
 
 
 		// ------------------------------------------------------------------
 
 		protected virtual void Update()
 		{
+			if (target == null)
+				return;
+
 			// Recalculate the path to the player every X frames
 			if (Time.frameCount % 3 == 0)
 				seeker.StartPath(transform.position, target.position, SetPath);

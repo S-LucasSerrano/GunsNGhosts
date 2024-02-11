@@ -27,6 +27,11 @@ namespace GunsNGhosts.CharacterController
 		/// <summary> Current ammount of ammo the player has. </summary>
 		int ammo = 0;
 
+		/// Animator of the name that appear on top of the player.
+		[Space] [SerializeField] Animator gunCanvasAnimator = null;
+		/// Texts where the Gun name will be written.
+		[SerializeField] TMPro.TextMeshProUGUI[] gunNameText = { };
+
 
 		// ----------------------------------------------------------------------
 		#region Start
@@ -38,8 +43,16 @@ namespace GunsNGhosts.CharacterController
 
 		private void Start()
 		{
-			Equip(gun);
+			gunCanvasAnimator.transform.parent = transform.parent;
+
+			Equip(gun, true);
 			ammo = maxAmmo;
+		}
+
+		private void OnDisable()
+		{
+			shooting = false;
+			gun.EndShooting();
 		}
 
 		#endregion
@@ -98,7 +111,7 @@ namespace GunsNGhosts.CharacterController
 			if (inputManager.GetButtonDown("Shoot"))
 			{
 				shooting = true;
-				gun.StartShooting(this);
+				gun.StartShooting();
 			}
 
 			if (inputManager.GetButton("Shoot"))
@@ -120,18 +133,27 @@ namespace GunsNGhosts.CharacterController
 		#region Gun
 
 		/// <summary> Equip a new Gun. </summary>
-		public void Equip(Gun newGun)
+		public void Equip(Gun newGun, bool initializing = false)
 		{
+			if (gun != null)
+				gun.Unequip();
+
 			gun = newGun;
 
 			if (gun != null)
-			{
-				gunSprite.sprite = gun.Sprite;
-			}
-			else
-			{
-				gunSprite.sprite = null;
-			}
+				gun.Equip(this);
+
+			// Change the sprite.
+			gunSprite.sprite = gun != null ? gun.Sprite : null;
+			// Show the gun name in the UI texts.
+			foreach (TMPro.TextMeshProUGUI text in gunNameText)
+				text.text = gun != null ? gun.DisplayName : "";
+
+			if (initializing) return;
+
+			// Play the animation of the Gun name on top the player.
+			gunCanvasAnimator.transform.position = transform.position;
+			gunCanvasAnimator.SetTrigger("Equip");
 		}
 
 		public bool UseAmmo(int amount)
@@ -146,6 +168,18 @@ namespace GunsNGhosts.CharacterController
 
 			return true;
 		}
+
+		/// <summary> Add the given amount of ammo. </summary>
+		public void Reload(int amount)
+		{
+			ammo += amount;
+			if (ammo > maxAmmo)
+				ammo = maxAmmo;
+		}
+
+		/// <summary> Return the current ammo to the max. </summary>
+		public void Reload() => ammo = maxAmmo;
+
 
 		#endregion
 

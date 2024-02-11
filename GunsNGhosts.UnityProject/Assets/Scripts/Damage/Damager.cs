@@ -10,7 +10,18 @@ namespace GunsNGhosts.Damage
 		/// <summary> LayerMask that defines what layers can get damage from this damager. </summary>
 		[SerializeField] LayerMask layerMask = int.MaxValue;
 
+
 		private void OnTriggerEnter2D(Collider2D other)
+		{
+			TryMakeDamage(other);
+		}
+
+		private void OnCollisionEnter2D(Collision2D collision)
+		{
+			TryMakeDamage(collision.collider);
+		}
+
+		void TryMakeDamage(Collider2D other)
 		{
 			if (layerMask.ContainsLayer(other.gameObject.layer) == false)
 				return;

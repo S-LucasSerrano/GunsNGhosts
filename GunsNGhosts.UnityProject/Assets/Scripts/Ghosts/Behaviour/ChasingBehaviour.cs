@@ -6,7 +6,7 @@ namespace GunsNGhosts.Ghosts
 	public class ChasingBehaviour : GhostBehaviour
 	{
 		/// <summary> Target position that this Ghost tries to reach. </summary>
-		[Space] [SerializeField] protected Transform target = null;
+		protected Transform target = null;
 		/// <summary> Direction this Ghost needs to move to reach de target. </summary>
 		protected Vector3 targetDirection = Vector3.up;
 
@@ -22,6 +22,13 @@ namespace GunsNGhosts.Ghosts
 		/// Distance from the Ghost at which obstacles can be detected.
 		[SerializeField] protected float obstacleMinDistance = 0.5f;
 		[SerializeField] protected float obstacleMaxDistance = 1;
+
+
+		// ------------------------------------------------------------------
+		protected virtual void Start()
+		{
+			target = ReferenceProvider.GetReference<Player>().Transform;
+		}
 
 
 		// ------------------------------------------------------------------
@@ -70,7 +77,7 @@ namespace GunsNGhosts.Ghosts
 		protected virtual Vector3 GetTargetDirection()
 		{
 			if (target == null)
-				return Vector3.zero;
+				return Vector3.right;
 			return (target.position - transform.position).normalized;
 		}
 
