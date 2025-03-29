@@ -15,9 +15,9 @@ MonoBehaviour:
   spawnRanges:
   - inspectorName: 
     minScore: 0
-    intervalAtMinScore: 1
-    maxScore: 50
-    intervalAtMaxScore: 0.4
+    intervalAtMinScore: 1.5
+    maxScore: 80
+    intervalAtMaxScore: 0.5
     curve:
       serializedVersion: 2
       m_Curve:
@@ -60,7 +60,7 @@ MonoBehaviour:
       chance: 1
     - id: ghost.orange
       chance: 0.5
-  repeatEachXPoints: 67
+  repeatEachXPoints: 100
   repeatMinInterval: 1.5
   repeatMaxInterval: 0.1
   repeatSpawnCurve:

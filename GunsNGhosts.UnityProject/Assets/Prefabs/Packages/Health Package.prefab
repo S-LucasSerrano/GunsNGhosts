@@ -52,9 +52,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3954391927583882869, guid: 753f77075efb3fd4cb0e4c4acb1717c0, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 6565782568608426231, guid: 753f77075efb3fd4cb0e4c4acb1717c0, type: 3}
       propertyPath: m_Name
-      value: Base Package Variant
+      value: Health Package
+      objectReference: {fileID: 0}
+    - target: {fileID: 7722944603233650275, guid: 753f77075efb3fd4cb0e4c4acb1717c0, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 8640077535798190615, guid: 753f77075efb3fd4cb0e4c4acb1717c0, type: 3}
       propertyPath: m_Sprite
@@ -89,4 +97,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3246b3122ead0e04b91c066bef1d516c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
+  health: 2

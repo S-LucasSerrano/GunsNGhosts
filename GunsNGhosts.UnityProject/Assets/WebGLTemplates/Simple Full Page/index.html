@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+	<link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <title>{{{ PRODUCT_NAME }}}</title>
+
+	<link rel="stylesheet" href="TemplateData/style.css">
+</head>
+
+<body style="text-align: center; padding: 0; border: 0; margin: 0;">
+
+	<!-- Canvas in which Unity renders the game. -->
+	<canvas id="unity-canvas" width={{{ WIDTH }}} height={{{ HEIGHT }}} tabindex="-1" style="width: {{{ WIDTH }}}px; height: {{{ HEIGHT }}}px; background: {{{ BACKGROUND_FILENAME ? 'url(\'Build/' + BACKGROUND_FILENAME.replace(/'/g, '%27') + '\') center / cover' : BACKGROUND_COLOR }}}"></canvas>
+	  
+	<!-- Loading screen. -->
+	<div id="loading-screen">
+		<div id="progress-bar-empty">
+			<div id="progress-bar-full"></div>
+		</div>
+	</div>
+
+	 <!-- Script Unity needs to import. It will be at the target relative route after building the game. -->
+	<script src="Build/{{{ LOADER_FILENAME }}}"></script>
+	<!-- JavaScript Code. -->
+	<script>
+	
+		// Make the canvas fill the entire screen.
+		var canvas = document.querySelector("#unity-canvas");
+		canvas.style.width = "100%";
+		canvas.style.height = "100%";
+		canvas.style.position = "fixed";
+
+		document.body.style.textAlign = "left";
+
+		var meta = document.createElement('meta');	/* I don't really know what Untiy uses this for. */
+		meta.name = 'viewport';
+		meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+		document.getElementsByTagName('head')[0].appendChild(meta);
+
+		// Loading screen functionality.
+		var loadingScreen = document.querySelector("#loading-screen");
+		var loadingBar =  document.querySelector("#progress-bar-full");
+		var onLoadProgress = (progress)=>
+		{
+			loadingBar.style.width = (100*progress) + "%";
+			if (progress >= 1)
+			{
+				loadingScreen.style.display = "none";
+			}	
+		};
+				
+		// Parameters passed to the Unity player.
+		var config = {
+			arguments: [],
+			dataUrl: "Build/{{{ DATA_FILENAME }}}",
+			frameworkUrl: "Build/{{{ FRAMEWORK_FILENAME }}}",
+			#if USE_THREADS
+				workerUrl: "Build/{{{ WORKER_FILENAME }}}",
+			#endif
+			#if USE_WASM
+				codeUrl: "Build/{{{ CODE_FILENAME }}}",
+			#endif	
+			#if SYMBOLS_FILENAME
+				symbolsUrl: "Build/{{{ SYMBOLS_FILENAME }}}",
+			#endif
+			streamingAssetsUrl: "StreamingAssets",
+			companyName: {{{ JSON.stringify(COMPANY_NAME) }}},
+			productName: {{{ JSON.stringify(PRODUCT_NAME) }}},
+			productVersion: {{{ JSON.stringify(PRODUCT_VERSION) }}},
+			// matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+			// devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+		};
+		// This function loads the game (it's included in the script imported above),
+		//		drawing the game on the target canvas, with the target cofig and calling the target function with the loading progress.
+		createUnityInstance(document.querySelector("#unity-canvas"), config, onLoadProgress);
+		</script>
+  	</body>
+</html>
